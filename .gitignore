@@ -1,7 +1,9 @@
-web
-vendor
-node_modules
+/web
+/vendor
+/node_modules
 /*.patch
 *.sql
 *.sql.gz
 *.gz
+/modules
+/drupal-*

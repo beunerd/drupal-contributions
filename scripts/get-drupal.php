@@ -7,6 +7,9 @@
 
 include '/app/config/drupal-branch.php';
 
+// exec(
+//   "git clone --branch $drupalBranch --depth 1 https://git.drupalcode.org/project/drupal.git web"
+// );
 exec(
-  "git clone --branch $drupalBranch --depth 1 https://git.drupalcode.org/project/drupal.git web"
+  "mkdir web && cp -r drupal-$drupalBranch/* web"
 );

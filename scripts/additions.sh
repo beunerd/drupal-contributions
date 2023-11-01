@@ -1,15 +1,15 @@
 #!/bin/bash
 set -e
 
-# Create symlink within lando to the other folder location with modules work.
-ln -sfn /user/Sites/drupal-contributions--modules web/modules/custom
-
-# Create symlink that we can actually use to make edits directly from this project.
-ln -sfn ../../../drupal-contributions--modules web/modules/custom_host
+# Create symlink to modules development folder.
+ln -sfn /app/modules web/modules/custom
 
 # Get default modules via composer.
 cd /app/web
-composer require drupal/admin_toolbar drupal/gin drupal/gin_toolbar drupal/devel drupal/devel_kint_extras kint-php/kint:^3.3 drupal/console
+composer config minimum-stability 'dev'
+composer config repositories.0 '{"type": "composer", "url": "https://packages.drupal.org/8"}'
+composer config repositories.devel_kint_extras '{"type": "package", "package": {"name": "devel_kint_extras/devel_kint_extras", "version": "1.0", "type": "drupal-module", "source": {"url": "https://git.drupalcode.org/issue/devel_kint_extras-3277126.git", "type": "git", "reference": "3277126-support-kint-phpkint-version"}}}'
+composer require --prefer-dist --optimize-autoloader drush/drush:11.0.5 drupal/admin_toolbar drupal/gin drupal/gin_toolbar drupal/devel:^4.1 devel_kint_extras/devel_kint_extras:^1.0 kint-php/kint:^4.0 drupal/console -W
 cd ..
 
 # Enable modules and theme.
@@ -28,11 +28,11 @@ web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.
 # Remove unnecessary config.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_account_menu -y
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_main_menu -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_powered  -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_narrow  -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_wide  -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_site_branding  -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_syndicate  -y
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_powered -y
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_narrow -y
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_wide -y
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_site_branding -y
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_syndicate -y
 
 # Copy over lando settings.
 cp scripts/settings.lando.php web/sites/default/

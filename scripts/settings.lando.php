@@ -34,11 +34,13 @@ $config['system.performance']['js']['preprocess'] = FALSE;
 $settings['rebuild_access'] = TRUE;
 $settings['skip_permissions_hardening'] = TRUE;
 $settings['config_sync_directory'] = '/app/config/sync';
-// $settings['cache']['bins']['render'] = 'cache.backend.null';
-// $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+$settings['cache']['bins']['render'] = 'cache.backend.null';
+$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
 
 // Kint
 include_once('vendor/kint-php/kint/src/Kint.php');
 if (class_exists('Kint')) {
-  \Kint::$max_depth = 4;
+  \Kint::$depth_limit = 4;
 }
+
+ini_set('memory_limit', '-1');
