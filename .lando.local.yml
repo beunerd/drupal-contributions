@@ -1,6 +1,8 @@
 services:
   appserver:
     type: php:8.1
+    build_as_root:
+      - /app/scripts/settings.sh
   mailhog:
     type: mailhog:v1.0.1
     portforward: true
@@ -14,3 +16,9 @@ services:
 events:
   post-rebuild:
     - appserver: /app/scripts/additions.sh
+
+tooling:
+  drupal:
+    service: appserver
+    cmd: drupal
+    dir: /app
