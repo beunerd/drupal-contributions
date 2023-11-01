@@ -8,35 +8,25 @@ ln -sfn /app/modules web/modules/custom
 cd /app/web
 sed -i 's/.*"php".*//' ./composer.json
 composer config minimum-stability 'dev'
-composer config repositories.0 '{"type": "composer", "url": "https://packages.drupal.org/8"}'
-composer config repositories.devel_kint_extras '{"type": "package", "package": {"name": "devel_kint_extras/devel_kint_extras", "version": "1.0", "type": "drupal-module", "source": {"url": "https://git.drupalcode.org/issue/devel_kint_extras-3277126.git", "type": "git", "reference": "3277126-support-kint-phpkint-version"}}}'
-composer require --prefer-dist --optimize-autoloader drush/drush:11.0.5 drupal/admin_toolbar drupal/gin drupal/gin_toolbar drupal/devel:^4.1 devel_kint_extras/devel_kint_extras:^1.0 kint-php/kint:^4.0 drupal/console cweagans/composer-patches:^2 -W
-cd ..
+composer config allow-plugins.cweagans/composer-patches true
+composer require --prefer-dist --optimize-autoloader cweagans/composer-patches:^2 drupal/admin_toolbar drupal/gin:^3.0 drupal/gin_toolbar:^1.0 drupal/devel:^5.1 drupal/devel_kint_extras:^1.1 kint-php/kint:^4.0 vlucas/phpdotenv:^5.5 -W
+cd /
 
-# Enable modules and theme.
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site en admin_toolbar,devel,devel_kint_extras, -y
-
-# Copy over custom configuration.
-mkdir -p web/partials
-cp additions/* web/partials/
+# Link to custom configuration.
+ln -s /app/config/additions /app/web/additions
 
 # Import configuration items.
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cim --partial --source=partials/ -y
+/app/web/vendor/drush/drush/drush --root=/app/web cim --partial --source=additions/ -y
 
 # Set default admin theme.
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site config-set system.theme admin gin -y
+/app/web/vendor/drush/drush/drush --root=/app/web config-set system.theme admin gin -y
 
-# Remove unnecessary config.
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_account_menu -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_main_menu -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_powered -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_narrow -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_wide -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_site_branding -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_syndicate -y
+# Link to lando settings.
+ln -s /app/scripts/settings.lando.php /app/web/sites/default/settings.lando.php
 
-# Copy over lando settings.
-ln -s /app/scripts/settings.lando.php web/sites/default/settings.lando.php
+tee -a /app/web/sites/default/settings.php >/dev/null <<'EOF'
 
-# Return a one-time login link.
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site uli
+if (file_exists($app_root . '/' . $site_path . '/settings.lando.php')) {
+  include $app_root . '/' . $site_path . '/settings.lando.php';
+}
+EOF

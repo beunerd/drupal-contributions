@@ -4,4 +4,4 @@
  * @file
  * The branch of Drupal core targeted by the current issue.
  */
-$drupalBranch = '9.5.0';
+$drupalBranch = '10.1.x';
