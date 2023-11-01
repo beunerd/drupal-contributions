@@ -27,6 +27,7 @@ web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.
 
 # Remove unnecessary config.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_account_menu -y
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_main_menu -y
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_powered  -y
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_narrow  -y
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_search_form_wide  -y
