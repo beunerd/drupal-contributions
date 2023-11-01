@@ -1,8 +1,12 @@
 #!/bin/bash
 set -e
 
+# Create config sync directory.
+mkdir /app/config/sync
+
 # Create symlink to modules development folder.
-ln -sfn /app/modules web/modules/custom
+mkdir /app/custom-modules
+ln -sfn /app/custom-modules web/modules/custom
 
 # Get default modules via composer.
 cd /app/web
@@ -30,3 +34,5 @@ if (file_exists($app_root . '/' . $site_path . '/settings.lando.php')) {
   include $app_root . '/' . $site_path . '/settings.lando.php';
 }
 EOF
+
+/app/web/vendor/drush/drush/drush --root=/app/web uli
