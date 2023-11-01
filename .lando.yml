@@ -72,6 +72,11 @@ tooling:
     description: Creat a patch from your committed changes on your branch.
     cmd:
       - appserver: php /app/scripts/patch-helpers.php --create-patch
+  # To run phpunit tests if the lndo.site URL is broken, lando ssh into the instance
+  # and run SIMPLETEST_BASE_URL=https://localhost:PORT/ (where "PORT" is the number
+  # assigned by docker when starting the container). Then, while still inside
+  # the container, run the command below manually.
+  # For example: php /app/web/vendor/bin/phpunit -c /app/phpunit.xml --group google_analytics
   phpunit:
     service: appserver
     user: www-data
