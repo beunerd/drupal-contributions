@@ -6,6 +6,7 @@ ln -sfn /app/modules web/modules/custom
 
 # Get default modules via composer.
 cd /app/web
+sed -i 's/.*"php".*//' ./composer.json
 composer config minimum-stability 'dev'
 composer config repositories.0 '{"type": "composer", "url": "https://packages.drupal.org/8"}'
 composer config repositories.devel_kint_extras '{"type": "package", "package": {"name": "devel_kint_extras/devel_kint_extras", "version": "1.0", "type": "drupal-module", "source": {"url": "https://git.drupalcode.org/issue/devel_kint_extras-3277126.git", "type": "git", "reference": "3277126-support-kint-phpkint-version"}}}'
