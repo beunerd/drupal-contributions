@@ -13,4 +13,4 @@ services:
 
 events:
   post-rebuild:
-    - appserver: /app/additions/post-rebuild.sh
+    - appserver: /app/scripts/additions.sh

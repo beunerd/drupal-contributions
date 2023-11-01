@@ -14,17 +14,16 @@ cd ..
 
 # Enable modules and theme.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site en admin_toolbar,devel,devel_kint_extras, -y
-web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site config-set system.theme admin gin -y
 
 # Copy over custom configuration.
 mkdir -p web/partials
-cp additions/core.extension.yml web/partials/
-cp additions/devel.settings.yml web/partials/
-cp additions/devel.toolbar.settings.yml web/partials/
-cp additions/system.menu.devel.yml web/partials/
+cp additions/* web/partials/
 
 # Import configuration items.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cim --partial --source=partials/ -y
+
+# Set default admin theme.
+web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site config-set system.theme admin gin -y
 
 # Return a one-time login link.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site uli
