@@ -1,5 +1,6 @@
 module:
   admin_toolbar: 0
+  admin_toolbar_tools: 0
   automated_cron: 0
   big_pipe: 0
   block: 0
@@ -11,18 +12,23 @@ module:
   contact: 0
   contextual: 0
   datetime: 0
+  datetime_range: 0
   dblog: 0
   devel: 0
+  devel_generate: 0
   devel_kint_extras: 0
   dynamic_page_cache: 0
   editor: 0
   field: 0
+  field_layout: 0
   field_ui: 0
   file: 0
   filter: 0
+  gin_toolbar: 0
   help: 0
   history: 0
   image: 0
+  layout_discovery: 0
   link: 0
   menu_link_content: 0
   menu_ui: 0
@@ -35,14 +41,17 @@ module:
   rdf: 0
   search: 0
   shortcut: 0
+  syslog: 0
   system: 0
   taxonomy: 0
+  telephone: 0
   text: 0
   toolbar: 0
   tour: 0
   update: 0
   user: 0
   views_ui: 0
+  webprofiler: 0
   views: 10
   standard: 1000
 theme:
