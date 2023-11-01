@@ -22,3 +22,7 @@ tooling:
     service: appserver
     cmd: drupal
     dir: /app
+  composer:
+    service: appserver
+    cmd: composer
+    dir: /app/web
