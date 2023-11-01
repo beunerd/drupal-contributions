@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+set -e
 
 # Create symlink within lando to the other folder location with modules work.
 ln -sfn /user/Sites/drupal-contributions--modules web/modules/custom
@@ -7,7 +8,7 @@ ln -sfn /user/Sites/drupal-contributions--modules web/modules/custom
 ln -sfn ../../../drupal-contributions--modules web/modules/custom_host
 
 # Get default modules via composer.
-cd web
+cd /app/web
 composer require drupal/admin_toolbar drupal/gin drupal/gin_toolbar drupal/devel drupal/devel_kint_extras kint-php/kint:^3.3
 cd ..
 
