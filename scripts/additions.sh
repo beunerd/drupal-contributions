@@ -2,10 +2,10 @@
 set -e
 
 # Create config sync directory.
-mkdir /app/config/sync
+if [ ! -d /app/config/sync ] ; then mkdir /app/config/sync; fi
 
-# Create symlink to modules development folder.
-mkdir /app/custom-modules
+# Create and link to a custom modules development folder.
+if [ ! -d /app/custom-modules ] ; then mkdir /ap/custom-modules; fi
 ln -sfn /app/custom-modules web/modules/custom
 
 # Get default modules via composer.
@@ -18,6 +18,10 @@ cd /
 
 # Link to custom configuration.
 ln -s /app/config/additions /app/web/additions
+
+# Install gin theme and toolbar.
+/app/web/vendor/drush/drush/drush --root=/app/web then gin
+/app/web/vendor/drush/drush/drush --root=/app/web en gin_toolbar
 
 # Import configuration items.
 /app/web/vendor/drush/drush/drush --root=/app/web cim --partial --source=additions/ -y
@@ -35,4 +39,5 @@ if (file_exists($app_root . '/' . $site_path . '/settings.lando.php')) {
 }
 EOF
 
+# Generate new one-time login.
 /app/web/vendor/drush/drush/drush --root=/app/web uli
