@@ -11,5 +11,6 @@ services:
     hosts:
       - database
 
-ready:
-  - appserver: additions/ready.sh
+events:
+  post-rebuild:
+    - appserver: /app/additions/post-rebuild.sh

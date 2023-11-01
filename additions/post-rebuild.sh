@@ -17,7 +17,8 @@ web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site config-set system.theme admin gin -y
 
 # Copy over custom configuration.
-cp additions/core.extensions.yml web/partials/
+mkdir -p web/partials
+cp additions/core.extension.yml web/partials/
 cp additions/devel.settings.yml web/partials/
 cp additions/devel.toolbar.settings.yml web/partials/
 cp additions/system.menu.devel.yml web/partials/
