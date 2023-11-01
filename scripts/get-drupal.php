@@ -8,5 +8,5 @@
 include '/app/config/drupal-branch.php';
 
 exec(
-  "git clone --branch $drupalBranch https://git.drupalcode.org/project/drupal.git web"
+  "git clone --branch $drupalBranch --depth 1 https://git.drupalcode.org/project/drupal.git web"
 );
