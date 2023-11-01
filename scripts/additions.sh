@@ -36,7 +36,7 @@ web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site cdel block.block.gin_syndicate -y
 
 # Copy over lando settings.
-cp scripts/settings.lando.php web/sites/default/
+ln -s /app/scripts/settings.lando.php web/sites/default/settings.lando.php
 
 # Return a one-time login link.
 web/vendor/drush/drush/drush --root=/app/web --uri=https://drupal-contributions.lndo.site uli
