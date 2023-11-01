@@ -10,7 +10,7 @@ sed -i 's/.*"php".*//' ./composer.json
 composer config minimum-stability 'dev'
 composer config repositories.0 '{"type": "composer", "url": "https://packages.drupal.org/8"}'
 composer config repositories.devel_kint_extras '{"type": "package", "package": {"name": "devel_kint_extras/devel_kint_extras", "version": "1.0", "type": "drupal-module", "source": {"url": "https://git.drupalcode.org/issue/devel_kint_extras-3277126.git", "type": "git", "reference": "3277126-support-kint-phpkint-version"}}}'
-composer require --prefer-dist --optimize-autoloader drush/drush:11.0.5 drupal/admin_toolbar drupal/gin drupal/gin_toolbar drupal/devel:^4.1 devel_kint_extras/devel_kint_extras:^1.0 kint-php/kint:^4.0 drupal/console -W
+composer require --prefer-dist --optimize-autoloader drush/drush:11.0.5 drupal/admin_toolbar drupal/gin drupal/gin_toolbar drupal/devel:^4.1 devel_kint_extras/devel_kint_extras:^1.0 kint-php/kint:^4.0 drupal/console cweagans/composer-patches:^2 -W
 cd ..
 
 # Enable modules and theme.
